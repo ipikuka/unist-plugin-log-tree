@@ -61,6 +61,16 @@ export default function plugin(options?: UnistLogTreeOptions): Plugin<[], Node> 
     }
 
     /*
+     * Type guard to check if an array of Node
+     */
+    function isNodeArray(value: unknown): value is Node[] {
+      return (
+        Array.isArray(value) &&
+        (value as unknown[]).every((item) => item && typeof item === "object" && "type" in item)
+      );
+    }
+
+    /*
      * Type guard to check if a node is a unist Node
      */
     function isNode(value: unknown): value is Node {
@@ -122,7 +132,7 @@ export default function plugin(options?: UnistLogTreeOptions): Plugin<[], Node> 
 
           if (!value) continue;
 
-          if (Array.isArray(value)) {
+          if (isNodeArray(value)) {
             let containsNode = false;
 
             for (let i = value.length - 1; i >= 0; i--) {
@@ -176,8 +186,8 @@ export default function plugin(options?: UnistLogTreeOptions): Plugin<[], Node> 
         console.log(`[unist-log-tree] ${settings.label}`);
       }
 
-      const output = JSON.parse(
-        JSON.stringify(targetTree, (key, value) => {
+      const output: Node = JSON.parse(
+        JSON.stringify(targetTree, (key: string, value: unknown) => {
           if (!settings.preservePositions && key === "position") {
             return undefined;
           }

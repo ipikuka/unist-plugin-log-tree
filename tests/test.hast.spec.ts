@@ -77,7 +77,7 @@ function createTree(): Node {
   } as Node;
 }
 
-function hasAnyPosition(node: any): boolean {
+function hasAnyPosition(node: Node): boolean {
   if (!node || typeof node !== "object") return false;
   if ("position" in node) return true;
   if (Array.isArray(node.children)) {

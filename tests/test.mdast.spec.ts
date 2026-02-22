@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { unified } from "unified";
+import type { Parent } from "unist";
 
 import plugin, { type Node } from "../src/index";
 
@@ -64,7 +65,7 @@ function createTree(): Node {
   } as Node;
 }
 
-function hasAnyPosition(node: any): boolean {
+function hasAnyPosition(node: Node): boolean {
   if (!node || typeof node !== "object") return false;
 
   if ("position" in node) return true;
@@ -149,8 +150,10 @@ describe("unist-log-tree", () => {
       end: { line: 1, column: 3, offset: 3 },
     };
 
-    ((tree as any).children[0] as any).position = { start: {}, end: {} };
-    ((tree as any).children[1].children[1] as any).position = { start: {}, end: {} };
+    ((tree as unknown as Parent).children[0] as Parent).position = {
+      start: { line: 1, column: 0, offset: 0 },
+      end: { line: 1, column: 3, offset: 3 },
+    };
 
     await unified()
       .use(plugin({ preservePositions: false }))
@@ -164,8 +167,10 @@ describe("unist-log-tree", () => {
   it("preservePositions=true keeps positions", async () => {
     const tree = createTree();
 
-    // add position to the root
-    (tree as any).position = { start: {}, end: {} };
+    tree.position = {
+      start: { line: 1, column: 0, offset: 0 },
+      end: { line: 1, column: 3, offset: 3 },
+    };
 
     await unified()
       .use(plugin({ preservePositions: true }))

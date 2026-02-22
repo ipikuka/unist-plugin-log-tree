@@ -183,7 +183,7 @@ describe("unist-log-tree (esast)", () => {
 
     await unified()
       .use(plugin({ test: "ImportDeclaration" })) // don't match anything
-      .run(tree as any);
+      .run(tree);
 
     const out = output();
 
