@@ -385,7 +385,7 @@ I also build low-level utilities and plugins for the Unist ecosystem that can be
 [badge-typescript]: https://img.shields.io/npm/types/unist-plugin-log-tree
 [url-typescript]: https://www.typescriptlang.org/
 
-[badge-codecov]: https://codecov.io/gh/ipikuka/unist-plugin-log-tree/graph/badge.svg?token=DB491JPTDO
+[badge-codecov]: https://codecov.io/gh/ipikuka/unist-plugin-log-tree/graph/badge.svg?token=bzXcCBzY4P
 [url-codecov]: https://codecov.io/gh/ipikuka/unist-plugin-log-tree
 
 [badge-type-coverage]: https://img.shields.io/badge/dynamic/json.svg?label=type-coverage&prefix=%E2%89%A5&suffix=%&query=$.typeCoverage.atLeast&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fipikuka%2Funist-plugin-log-tree%2Fmaster%2Fpackage.json
