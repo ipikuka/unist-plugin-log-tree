@@ -196,7 +196,7 @@ Default: `true`
 
 Controls behavior when a node matches `test`.
 
-- `true` → Keep the entire subtree of the matched node.
+- `true` → Keep the matched node and entire subtree.
 - `false` → Recursively filter its children as well.
 
 Example:
@@ -205,6 +205,13 @@ Example:
 .use(logTree({
   test: "heading",
   preserveSubtree: false
+}))
+```
+
+```js
+.use(logTree({
+  test: { type: "CallExpression" }
+  preserveSubtree: true
 }))
 ```
 

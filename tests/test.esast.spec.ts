@@ -25,6 +25,7 @@ function createTree(): Node {
               type: "ExpressionStatement",
               expression: {
                 type: "CallExpression",
+                range: [10, 25],
                 callee: {
                   type: "MemberExpression",
                   object: { type: "Identifier", name: "console" },
@@ -189,5 +190,46 @@ describe("unist-log-tree (esast)", () => {
 
     expect(out.body).toEqual([]);
     expect(out.body.length).toBe(0);
+  });
+
+  it("CallExpression test: validates parent chain and preserveSubtree toggle", async () => {
+    const tree = createTree();
+
+    await unified()
+      .use(
+        plugin({
+          test: { type: "CallExpression" },
+          preserveSubtree: true,
+          excludeKeys: ["range"],
+        }),
+      )
+      .run(tree);
+
+    const outTrue = output();
+    const callExprTrue = outTrue.body[0].body.body[0].expression;
+
+    expect(callExprTrue.type).toBe("CallExpression");
+    expect(callExprTrue.arguments).toBeDefined();
+    expect(callExprTrue.arguments.length).toBe(1);
+    expect(callExprTrue.callee.object.name).toBe("console");
+
+    dirSpy.mockClear();
+
+    await unified()
+      .use(
+        plugin({
+          test: { type: "CallExpression" },
+          preserveSubtree: false,
+          excludeKeys: ["range"],
+        }),
+      )
+      .run(tree);
+
+    const outFalse = output();
+    const callExprFalse = outFalse.body[0].body.body[0].expression;
+
+    expect(callExprFalse.type).toBe("CallExpression");
+    expect(callExprFalse.callee).toBeUndefined();
+    expect(callExprFalse.arguments).toEqual([]);
   });
 });

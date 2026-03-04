@@ -119,14 +119,20 @@ export default function plugin(options?: UnistLogTreeOptions): Plugin<[], Node> 
      */
     function buildFilteredTree(root: Node, test: Test): Node {
       const cloned = structuredClone(root);
+      prune(cloned);
+      return cloned;
 
       function prune(node: Node): boolean {
         const matched = is(node, test);
 
+        if (matched && settings.preserveSubtree !== false) {
+          return true; // don't touch subtree
+        }
+
         let hasChildMatch = false;
 
         for (const key in node) {
-          if (key === "position") continue;
+          if (settings.excludeKeys.includes(key)) continue;
 
           const value = node[key];
 
@@ -166,17 +172,8 @@ export default function plugin(options?: UnistLogTreeOptions): Plugin<[], Node> 
           }
         }
 
-        if (matched && settings.preserveSubtree !== false) {
-          return true; // don't touch subtree
-        }
-
-        if (matched) return true;
-
-        return hasChildMatch;
+        return matched || hasChildMatch;
       }
-
-      prune(cloned);
-      return cloned;
     }
 
     return function transformer(tree: Node) {
