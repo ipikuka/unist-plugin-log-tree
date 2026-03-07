@@ -1,6 +1,6 @@
 {
   "name": "unist-plugin-log-tree",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A debugging plugin for the unified ecosystem that logs unist syntax trees without transforming.",
   "type": "module",
   "main": "./dist/index.js",
