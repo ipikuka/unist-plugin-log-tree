@@ -13,28 +13,30 @@ export interface Node extends UnistNode {
 
 export type UnistLogTreeOptions = {
   depth?: number | null;
-  indentation?: number;
-  excludeKeys?: string[];
-  test?: Test;
-  preserveSubtree?: boolean;
-  label?: string;
   enabled?: boolean;
+  excludeKeys?: string[];
+  indentation?: number;
+  label?: string;
+  ref?: object;
+  preserveSubtree?: boolean;
+  test?: Test;
 };
 
 const DEFAULT_SETTINGS: UnistLogTreeOptions = {
   depth: null,
-  indentation: 2,
-  excludeKeys: [],
-  test: undefined,
-  preserveSubtree: true,
-  label: undefined,
   enabled: true,
+  excludeKeys: [],
+  indentation: 2,
+  label: undefined,
+  ref: undefined,
+  preserveSubtree: true,
+  test: undefined,
 };
 
 type PartiallyRequiredOptions = Prettify<
   PartiallyRequired<
     UnistLogTreeOptions,
-    "depth" | "indentation" | "preserveSubtree" | "enabled" | "excludeKeys"
+    "depth" | "enabled" | "excludeKeys" | "indentation" | "preserveSubtree"
   >
 >;
 
@@ -191,6 +193,10 @@ export default function plugin(options?: UnistLogTreeOptions): Plugin<[], Node> 
           return value;
         }),
       );
+
+      if (options?.ref !== undefined) {
+        Object.assign(options.ref, structuredClone(output));
+      }
 
       console.dir(output, { depth: settings.depth });
     };

@@ -318,4 +318,13 @@ describe("unist-log-tree", () => {
     expect(logSpy).toHaveBeenNthCalledWith(1, "[unist-log-tree] A");
     expect(logSpy).toHaveBeenNthCalledWith(2, "[unist-log-tree] B");
   });
+
+  it("ref option sets the reference", async () => {
+    const tree = createTree();
+    const ref = {};
+
+    await unified().use(plugin({ ref })).run(tree);
+
+    expect(ref).toMatchInlineSnapshot(output());
+  });
 });

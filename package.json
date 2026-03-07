@@ -19,7 +19,9 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:file": "vitest test.plugin.spec.ts",
+    "test:mdast": "vitest run test.mdast.spec.ts",
+    "test:hast": "vitest run test.hast.spec.ts",
+    "test:esast": "vitest run test.esast.spec.ts",
     "test-coverage": "vitest run --coverage",
     "prepack": "npm run build",
     "prepublishOnly": "npm run format && npm run test-coverage"

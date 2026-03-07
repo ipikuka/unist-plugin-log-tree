@@ -168,6 +168,7 @@ type UnistLogTreeOptions = {
   depth?: number | null;
   indentation?: number;
   label?: string;
+  ref?: object;
   enabled?: boolean;
 };
 ```
@@ -255,6 +256,33 @@ Adds a label before the logged tree.
 
 ```js
 .use(logTree({ label: "Rehype AST" }))
+```
+
+### `ref`
+
+Type: `object`  
+Default: `undefined`
+
+**An optional object reference that will be mutated to contain the resulting tree.** This is particularly useful in testing environments (like Vitest or Jest) where you need to perform assertions on the AST without relying on `console.log` captures.
+
+> [!IMPORTANT]
+> Because JavaScript uses call-by-sharing for objects, the plugin uses `Object.assign()` to update the reference you provide. This allows the tree data to "leak" back out to your test scope.
+
+```js
+const treeRef = {};
+
+const processor = unified()
+  .use(remarkParse)
+  .use(logTree, { 
+    ref: treeRef,
+    excludeKeys: ["position"] 
+  })
+  .use(remarkStringify);
+
+await processor.process("# Hello World");
+
+// treeRef now contains the processed MDAST
+console.log(treeRef.type); // "root"
 ```
 
 ### `enabled`
