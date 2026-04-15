@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { unified } from "unified";
 
-import plugin, { type Node } from "../src/index";
+import plugin, { type Node } from "../src/index.js";
 
 /*
 function test() {

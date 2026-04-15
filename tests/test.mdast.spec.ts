@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { unified } from "unified";
 import type { Parent } from "unist";
 
-import plugin, { type Node } from "../src/index";
+import plugin, { type Node } from "../src/index.js";
 
 /*
   ### heading1
