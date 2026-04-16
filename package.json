@@ -1,7 +1,7 @@
 {
-  "name": "unist-plugin-log-tree",
+  "name": "unified-log-tree",
   "version": "1.0.5",
-  "description": "A debugging plugin for the unified ecosystem that logs unist syntax trees without mutating.",
+  "description": "A debugging plugin for the unified ecosystem that logs ASTs without mutating.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -33,7 +33,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ipikuka/unist-plugin-log-tree.git"
+    "url": "git+https://github.com/ipikuka/unified-log-tree.git"
   },
   "keywords": [
     "unified",
@@ -49,9 +49,9 @@
   ],
   "author": "ipikuka <talatkuyuk@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/ipikuka/unist-plugin-log-tree#readme",
+  "homepage": "https://github.com/ipikuka/unified-log-tree#readme",
   "bugs": {
-    "url": "https://github.com/ipikuka/unist-plugin-log-tree/issues"
+    "url": "https://github.com/ipikuka/unified-log-tree/issues"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

@@ -47,4 +47,4 @@ jobs:
           fail_ci_if_error: true
           verbose: true
           token: ${{ secrets.CODECOV_TOKEN }}
-          slug: ipikuka/unist-plugin-log-tree
+          slug: ipikuka/unified-log-tree

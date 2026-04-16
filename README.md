@@ -3,7 +3,7 @@
 
 ### [Become a sponsor](https://github.com/sponsors/ipikuka) 🚀
 
-If you find **`unist-plugin-log-tree`** useful in your projects, consider supporting my work.  
+If you find **`unified-log-tree`** useful in your projects, consider supporting my work.  
 Your sponsorship means a lot 💖
 
 My sponsors are going to be featured here and on [my sponsor wall](https://github.com/sponsors/ipikuka).
@@ -12,7 +12,7 @@ A warm thanks 🙌 to [@ErfanEbrahimnia](https://github.com/ErfanEbrahimnia), [@
 
 Thank you for supporting open source! 🙌
 
-# unist-plugin-log-tree
+# unified-log-tree
 
 [![npm version][badge-npm-version]][url-npm-package]
 [![npm downloads][badge-npm-download]][url-npm-package]
@@ -28,13 +28,13 @@ This package is a [**unified**][unified] ([**remark**][remark]) plugin **to log 
 
 **This plugin is a universal syntax tree (unist) plugin for mdast, hast, estree, and other unist-based trees. It does not mutate the tree; it only inspects and logs it for debugging.**
 
-# unist-plugin-log-tree
+# unified-log-tree
 
 A debugging plugin for the unified ecosystem that logs unist syntax trees without mutating them.
 
 ## When should I use this?
 
-**`unist-plugin-log-tree`** is useful when you want to **inspect, debug, or snapshot syntax trees** during a unified processing pipeline.
+**`unified-log-tree`** is useful when you want to **inspect, debug, or snapshot syntax trees** during a unified processing pipeline.
 
 It works with any unist-compatible tree:
 
@@ -61,13 +61,13 @@ This package is ESM only.
 In Node.js (version 16+), install with npm:
 
 ```bash
-npm install unist-plugin-log-tree
+npm install unified-log-tree
 ```
 
 or
 
 ```bash
-yarn add unist-plugin-log-tree
+yarn add unified-log-tree
 ```
 
 ## Usage
@@ -100,7 +100,7 @@ Because of this structure, it returns a configured plugin instance immediately, 
 import { read } from "to-vfile";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
-import logTree from "unist-plugin-log-tree";
+import logTree from "unified-log-tree";
 
 const file = await unified()
   .use(remarkParse)
@@ -143,7 +143,7 @@ Console output:
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
-import logTree from "unist-plugin-log-tree";
+import logTree from "unified-log-tree";
 
 await unified()
   .use(remarkParse)
@@ -391,7 +391,7 @@ I also build low-level utilities and plugins for the Unist ecosystem that can be
 
 - [`unist-util-find-between-all`](https://www.npmjs.com/package/unist-util-find-between-all)
   – Unist utility to find the nodes between two nodes.
-- [`unist-plugin-log-tree`](https://www.npmjs.com/package/unist-plugin-log-tree)
+- [`unified-log-tree`](https://www.npmjs.com/package/unified-log-tree)
   – Debugging plugin for the unified ecosystem that logs abstract syntax trees (ASTs) without mutating.
 
 ## License
@@ -408,22 +408,22 @@ I also build low-level utilities and plugins for the Unist ecosystem that can be
 [esast]: https://github.com/syntax-tree/esast
 [MDX]: https://mdxjs.com/
 
-[badge-npm-version]: https://img.shields.io/npm/v/unist-plugin-log-tree
-[badge-npm-download]:https://img.shields.io/npm/dt/unist-plugin-log-tree
-[url-npm-package]: https://www.npmjs.com/package/unist-plugin-log-tree
-[url-github-package]: https://github.com/ipikuka/unist-plugin-log-tree
+[badge-npm-version]: https://img.shields.io/npm/v/unified-log-tree
+[badge-npm-download]:https://img.shields.io/npm/dt/unified-log-tree
+[url-npm-package]: https://www.npmjs.com/package/unified-log-tree
+[url-github-package]: https://github.com/ipikuka/unified-log-tree
 
-[badge-license]: https://img.shields.io/github/license/ipikuka/unist-plugin-log-tree
-[url-license]: https://github.com/ipikuka/unist-plugin-log-tree/blob/main/LICENSE
+[badge-license]: https://img.shields.io/github/license/ipikuka/unified-log-tree
+[url-license]: https://github.com/ipikuka/unified-log-tree/blob/main/LICENSE
 
-[badge-publish-to-npm]: https://github.com/ipikuka/unist-plugin-log-tree/actions/workflows/publish.yml/badge.svg
-[url-publish-github-actions]: https://github.com/ipikuka/unist-plugin-log-tree/actions/workflows/publish.yml
+[badge-publish-to-npm]: https://github.com/ipikuka/unified-log-tree/actions/workflows/publish.yml/badge.svg
+[url-publish-github-actions]: https://github.com/ipikuka/unified-log-tree/actions/workflows/publish.yml
 
-[badge-typescript]: https://img.shields.io/npm/types/unist-plugin-log-tree
+[badge-typescript]: https://img.shields.io/npm/types/unified-log-tree
 [url-typescript]: https://www.typescriptlang.org/
 
-[badge-codecov]: https://codecov.io/gh/ipikuka/unist-plugin-log-tree/graph/badge.svg?token=bzXcCBzY4P
-[url-codecov]: https://codecov.io/gh/ipikuka/unist-plugin-log-tree
+[badge-codecov]: https://codecov.io/gh/ipikuka/unified-log-tree/graph/badge.svg?token=bzXcCBzY4P
+[url-codecov]: https://codecov.io/gh/ipikuka/unified-log-tree
 
-[badge-type-coverage]: https://img.shields.io/badge/dynamic/json.svg?label=type-coverage&prefix=%E2%89%A5&suffix=%&query=$.typeCoverage.atLeast&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fipikuka%2Funist-plugin-log-tree%2Fmaster%2Fpackage.json
+[badge-type-coverage]: https://img.shields.io/badge/dynamic/json.svg?label=type-coverage&prefix=%E2%89%A5&suffix=%&query=$.typeCoverage.atLeast&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fipikuka%2Funified-log-tree%2Fmaster%2Fpackage.json
 
