@@ -11,7 +11,7 @@ export interface Node extends UnistNode {
   [key: string]: unknown;
 }
 
-export type UnistLogTreeOptions = {
+export type LogTreeOptions = {
   depth?: number | null;
   enabled?: boolean;
   excludeKeys?: string[];
@@ -22,7 +22,7 @@ export type UnistLogTreeOptions = {
   test?: Test;
 };
 
-const DEFAULT_SETTINGS: UnistLogTreeOptions = {
+const DEFAULT_SETTINGS: LogTreeOptions = {
   depth: null,
   enabled: true,
   excludeKeys: [],
@@ -35,7 +35,7 @@ const DEFAULT_SETTINGS: UnistLogTreeOptions = {
 
 type PartiallyRequiredOptions = Prettify<
   PartiallyRequired<
-    UnistLogTreeOptions,
+    LogTreeOptions,
     "depth" | "enabled" | "excludeKeys" | "indentation" | "preserveSubtree"
   >
 >;
@@ -51,7 +51,7 @@ type PartiallyRequiredOptions = Prettify<
  *
  * The original tree is never mutated.
  */
-export default function plugin(options?: UnistLogTreeOptions): Plugin<[], Node> {
+export default function plugin(options?: LogTreeOptions): Plugin<[], Node> {
   return function attacher() {
     const settings = Object.assign({}, DEFAULT_SETTINGS, options) as PartiallyRequiredOptions;
 
