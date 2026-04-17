@@ -124,7 +124,7 @@ describe("unist-log-tree", () => {
       .use(plugin({ label: "X" }))
       .run(tree);
 
-    expect(logSpy).toHaveBeenCalledWith("[unist-log-tree] X");
+    expect(logSpy).toHaveBeenCalledWith("[unified-log-tree] X");
   });
 
   it("excludeKeys=['position'] removes rootposition", async () => {
@@ -315,8 +315,8 @@ describe("unist-log-tree", () => {
       .run(tree);
 
     expect(logSpy).toHaveBeenCalledTimes(2);
-    expect(logSpy).toHaveBeenNthCalledWith(1, "[unist-log-tree] A");
-    expect(logSpy).toHaveBeenNthCalledWith(2, "[unist-log-tree] B");
+    expect(logSpy).toHaveBeenNthCalledWith(1, "[unified-log-tree] A");
+    expect(logSpy).toHaveBeenNthCalledWith(2, "[unified-log-tree] B");
   });
 
   it("ref option sets the reference", async () => {

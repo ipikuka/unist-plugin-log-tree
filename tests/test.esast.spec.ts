@@ -148,8 +148,8 @@ describe("unist-log-tree (esast)", () => {
       .use(plugin({ label: "B" }))
       .run(tree);
 
-    expect(logSpy).toHaveBeenNthCalledWith(1, "[unist-log-tree] A");
-    expect(logSpy).toHaveBeenNthCalledWith(2, "[unist-log-tree] B");
+    expect(logSpy).toHaveBeenNthCalledWith(1, "[unified-log-tree] A");
+    expect(logSpy).toHaveBeenNthCalledWith(2, "[unified-log-tree] B");
   });
 
   it("no match prunes both array and single-node fields in ESTree", async () => {

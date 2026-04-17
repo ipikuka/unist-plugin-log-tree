@@ -1,7 +1,6 @@
 import type { Plugin } from "unified";
 import type { Node as UnistNode } from "unist";
-import type { Test } from "unist-util-is";
-import { is } from "unist-util-is";
+import { is, type Test } from "unist-util-is";
 
 type Prettify<T> = { [K in keyof T]: T[K] } & {};
 
@@ -43,7 +42,7 @@ type PartiallyRequiredOptions = Prettify<
 /**
  * Debug utility plugin for unified processors.
  *
- * Logs the current unist tree (mdast, hast, estree, etc.)
+ * Logs the current abstract syntax tree (AST) (mdast, hast, esast, etc.)
  * with optional filtering and formatting controls.
  *
  * If `test` is provided, only matching nodes and their
@@ -182,7 +181,7 @@ export default function plugin(options?: LogTreeOptions): Plugin<[], Node> {
       const targetTree = settings.test != null ? buildFilteredTree(tree, settings.test) : tree;
 
       if (settings.label) {
-        console.log(`[unist-log-tree] ${settings.label}`);
+        console.log(`[unified-log-tree] ${settings.label}`);
       }
 
       const output: Node = JSON.parse(

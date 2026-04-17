@@ -36,11 +36,11 @@ A debugging plugin for the unified ecosystem that logs ASTs without mutating.
 
 **`unified-log-tree`** is useful when you want to **inspect, debug, or snapshot syntax trees** during a unified processing pipeline.
 
-It works with any unist-compatible tree:
+It works with any unist-compatible syntax tree:
 
 - mdast (remark)
 - hast (rehype)
-- esast / (recma)
+- esast (recma)
 - any custom unist-based AST
 
 This plugin:
@@ -112,7 +112,7 @@ Running this will print the full mdast to the console.
 
 ### With filtering
 
-You can pass a `test` option (powered by `unist-util-is`) to log only specific nodes.
+You can pass a `test` option (powered by **`unist-util-is`**) to log only specific nodes.
 
 ```js
 .use(logTree({ test: "heading" }))
@@ -133,7 +133,7 @@ This will:
 Console output:
 
 ```
-[unist-log-tree] Remark AST
+[unified-log-tree] Remark AST
 { ...tree }
 ```
 
@@ -324,7 +324,7 @@ This package is fully typed with TypeScript. The options type is exported as `Lo
 
 ## Compatibility
 
-This plugin works with unified version `6+`, and any unist-compatible trees in a plugin chain of remark, rehype, recma.
+This plugin works with unified version `6+`, and any unist-compatible syntax trees in a plugin chain of remark, rehype, recma.
 
 ## Security
 
