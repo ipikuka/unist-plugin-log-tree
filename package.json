@@ -1,6 +1,6 @@
 {
   "name": "unified-log-tree",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A debugging plugin for the unified ecosystem that logs ASTs without mutating.",
   "type": "module",
   "main": "./dist/index.js",
