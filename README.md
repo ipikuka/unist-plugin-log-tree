@@ -22,15 +22,11 @@ Thank you for supporting open source! 🙌
 [![typescript][badge-typescript]][url-typescript]
 [![license][badge-license]][url-license]
 
-This package is a [**unified**][unified] ([**remark**][remark]) plugin **to log and optionally filter ASTs for debugging purposes.** It is debugging plugin for the unified ecosystem that logs ASTs without mutating.
+This package is a [**unified**][unified] ([**remark**][remark]) plugin **to log and optionally filter abstract syntax trees (ASTs) for debugging purposes.** It is a debugging plugin for the unified ecosystem that logs ASTs without mutating.
 
 [**unified**][unified] is a project that transforms content with abstract syntax trees (ASTs) using the new parser [**micromark**][micromark]. [**remark**][remark] adds support for markdown to unified. [**mdast**][mdast] is the Markdown Abstract Syntax Tree (AST) which is a specification for representing markdown in a syntax tree. **[rehype][rehype]** is a tool that transforms HTML with plugins. **[hast][hast]** stands for HTML Abstract Syntax Tree (HAST) that rehype uses. **[recma][recma]** adds support for producing a javascript code by transforming **[esast][esast]** which stands for Ecma Script Abstract Syntax Tree (AST) that is used in production of compiled source for the **[MDX][MDX]**.
 
-**It is a unified plugin working with remark, rehype or recma. It doesn't mutate the AST. It only inspects and logs it for debugging.**
-
-# unified-log-tree
-
-A debugging plugin for the unified ecosystem that logs ASTs without mutating.
+**It is a unified plugin working with remark, rehype or recma. It doesn't mutate the AST. It only inspects and logs abstract syntax trees (ASTs) for debugging.**
 
 ## When should I use this?
 
@@ -388,7 +384,7 @@ I also build low-level utilities and plugins for the Unist ecosystem that can be
 - [`unist-util-find-between`](https://www.npmjs.com/package/unist-util-find-between)
   – Unist utility to find the nodes between two nodes.
 - [`unified-log-tree`](https://www.npmjs.com/package/unified-log-tree)
-  – Debugging plugin for the unified ecosystem that logs abstract syntax trees (ASTs) without mutating.
+  – Unified plugin to log abstract syntax trees (ASTs) without mutating.
 
 ## License
 
