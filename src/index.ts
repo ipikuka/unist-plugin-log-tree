@@ -1,6 +1,7 @@
 import type { Plugin } from "unified";
 import type { Node as UnistNode } from "unist";
-import { is, type Test } from "unist-util-is";
+import type { Test } from "unist-util-is";
+import { is } from "unist-util-is";
 
 type Prettify<T> = { [K in keyof T]: T[K] } & {};
 

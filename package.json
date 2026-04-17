@@ -72,13 +72,8 @@
     "vitest": "^4.1.4"
   },
   "dependencies": {
-    "@types/mdast": "^4.0.4",
-    "unist-builder": "^4.0.0",
-    "unist-util-find-after": "^5.0.0",
-    "unist-util-find-all-after": "^5.0.0",
-    "unist-util-find-all-before": "^5.0.0",
-    "unist-util-find-between-all": "^1.1.6",
-    "unist-util-visit": "^5.1.0"
+    "@types/unist": "^3.0.3",
+    "unist-util-is": "^6.0.1"
   },
   "peerDependencies": {
     "unified": "^11"
