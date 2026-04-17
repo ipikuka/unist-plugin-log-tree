@@ -1,6 +1,6 @@
 {
   "name": "unified-log-tree",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Unified plugin to log abstract syntax trees (ASTs) without mutating.",
   "type": "module",
   "main": "./dist/index.js",
