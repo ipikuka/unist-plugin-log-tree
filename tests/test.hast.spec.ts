@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { unified } from "unified";
+import type { Parent } from "unist";
 
 import plugin, { type Node } from "../src/index.js";
 
@@ -79,14 +80,17 @@ function createTree(): Node {
 
 function hasAnyPosition(node: Node): boolean {
   if (!node || typeof node !== "object") return false;
+
   if ("position" in node) return true;
+
   if (Array.isArray(node.children)) {
     return node.children.some(hasAnyPosition);
   }
+
   return false;
 }
 
-describe("unist-log-tree (hast)", () => {
+describe("unified-log-tree (hast)", () => {
   let dirSpy: ReturnType<typeof vi.spyOn>;
   let logSpy: ReturnType<typeof vi.spyOn>;
 
@@ -108,8 +112,10 @@ describe("unist-log-tree (hast)", () => {
 
     await unified().use(plugin()).run(tree);
 
-    expect(output().children.length).toBe(4);
-    expect(output()).toEqual(tree);
+    const out = output();
+
+    expect(out.children.length).toBe(4);
+    expect(out).toEqual(tree);
   });
 
   it("enabled=false: early return", async () => {
@@ -146,7 +152,29 @@ describe("unist-log-tree (hast)", () => {
       .use(plugin({ excludeKeys: ["position"] }))
       .run(tree);
 
-    expect(hasAnyPosition(output())).toBe(false);
+    expect(output().position).toBeUndefined();
+  });
+
+  it("excludeKeys=['position'] removes all positions", async () => {
+    const tree = createTree();
+
+    tree.position = {
+      start: { line: 1, column: 0, offset: 0 },
+      end: { line: 1, column: 3, offset: 3 },
+    };
+
+    ((tree as unknown as Parent).children[0] as Parent).position = {
+      start: { line: 1, column: 0, offset: 0 },
+      end: { line: 1, column: 3, offset: 3 },
+    };
+
+    await unified()
+      .use(plugin({ excludeKeys: ["position"] }))
+      .run(tree);
+
+    const out = dirSpy.mock.calls[0][0];
+
+    expect(hasAnyPosition(out)).toBe(false);
   });
 
   it("Undefined excludeKeys keeps positions", async () => {
@@ -169,7 +197,10 @@ describe("unist-log-tree (hast)", () => {
       .use(plugin({ test: undefined }))
       .run(tree);
 
-    expect(output()).toEqual(tree);
+    const out = output();
+
+    expect(out.children.length).toBe(4);
+    expect(out).toEqual(tree);
   });
 
   it("test null => full tree", async () => {
@@ -179,7 +210,10 @@ describe("unist-log-tree (hast)", () => {
       .use(plugin({ test: null }))
       .run(tree);
 
-    expect(output()).toEqual(tree);
+    const out = output();
+
+    expect(out.children.length).toBe(4);
+    expect(out).toEqual(tree);
   });
 
   it("string test filters elements", async () => {
@@ -192,7 +226,7 @@ describe("unist-log-tree (hast)", () => {
     expect(output().children.length).toBe(4);
   });
 
-  it("props test filters specific heading via text node", async () => {
+  it("filters specific heading by text node value", async () => {
     const tree = createTree();
 
     await unified()
@@ -207,10 +241,12 @@ describe("unist-log-tree (hast)", () => {
       .run(tree);
 
     const out = output();
+    const heading = out.children[0];
 
     expect(out.children.length).toBe(1);
-    expect(out.children[0].tagName).toBe("h3");
-    expect(out.children[0].children[0]).toMatchObject({
+    expect(heading.tagName).toBe("h3");
+    expect(heading.children.length).toBe(1);
+    expect(heading.children[0]).toMatchObject({
       type: "text",
       value: "heading2",
     });
@@ -224,6 +260,7 @@ describe("unist-log-tree (hast)", () => {
       .run(tree);
 
     const out = output();
+
     expect(out.children.length).toBe(1);
     expect(out.children[0].tagName).toBe("p");
   });
@@ -245,7 +282,10 @@ describe("unist-log-tree (hast)", () => {
       .use(plugin({ test: "table" }))
       .run(tree);
 
-    expect(output().children).toEqual([]);
+    const out = output();
+
+    expect(out.type).toBe("root");
+    expect(out.children).toEqual([]);
   });
 
   it("depth forwarded to console.dir", async () => {
@@ -256,6 +296,16 @@ describe("unist-log-tree (hast)", () => {
       .run(tree);
 
     expect(dirSpy).toHaveBeenCalledWith(expect.anything(), { depth: 1 });
+  });
+
+  it("indentation path executes", async () => {
+    const tree = createTree();
+
+    await unified()
+      .use(plugin({ indentation: 4 }))
+      .run(tree);
+
+    expect(dirSpy).toHaveBeenCalled();
   });
 
   it("does not mutate original tree", async () => {
@@ -277,6 +327,7 @@ describe("unist-log-tree (hast)", () => {
       .use(plugin({ label: "B" }))
       .run(tree);
 
+    expect(logSpy).toHaveBeenCalledTimes(2);
     expect(logSpy).toHaveBeenNthCalledWith(1, "[unified-log-tree] A");
     expect(logSpy).toHaveBeenNthCalledWith(2, "[unified-log-tree] B");
   });

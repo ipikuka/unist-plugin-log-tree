@@ -53,7 +53,7 @@ function createTree(): Node {
   } as Node;
 }
 
-describe("unist-log-tree (esast)", () => {
+describe("unified-log-tree (esast)", () => {
   let dirSpy: ReturnType<typeof vi.spyOn>;
   let logSpy: ReturnType<typeof vi.spyOn>;
 

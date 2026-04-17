@@ -77,7 +77,7 @@ function hasAnyPosition(node: Node): boolean {
   return false;
 }
 
-describe("unist-log-tree", () => {
+describe("unified-log-tree (mdast)", () => {
   let dirSpy: ReturnType<typeof vi.spyOn>;
   let logSpy: ReturnType<typeof vi.spyOn>;
 
@@ -213,7 +213,7 @@ describe("unist-log-tree", () => {
     expect(output().children.length).toBe(2);
   });
 
-  it("function test filters specific heading", async () => {
+  it("filters specific heading by text node value", async () => {
     const tree = createTree();
 
     await unified()
